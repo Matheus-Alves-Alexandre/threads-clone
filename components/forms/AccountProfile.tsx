@@ -19,6 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 interface Props {
   user: {
@@ -105,16 +106,14 @@ function AccountProfile({ user, btnTitle }: Props) {
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem className="flex items-center gap-3 w-full">
+            <FormItem className="flex flex-col  w-full gap-3 ">
               <FormLabel className="text-base-semibold text-light-2">
                 Name
               </FormLabel>
-              <FormControl className="flex-1 text-base-semibold text-gray-200">
+              <FormControl className="">
                 <Input
                   type="text"
-                  accept="image/"
-                  placeholder="Upload a photo"
-                  className="account-form_image-input"
+                  className="account-form_input no-focus"
                   onChange={(e) => {
                     handleImage(e, field.onChange);
                   }}
@@ -124,7 +123,51 @@ function AccountProfile({ user, btnTitle }: Props) {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem className="flex flex-col  w-full gap-3">
+              <FormLabel className="text-base-semibold text-light-2">
+                username
+              </FormLabel>
+              <FormControl className="">
+                <Input
+                  type="text"
+                  className="account-form_input no-focus"
+                  onChange={(e) => {
+                    handleImage(e, field.onChange);
+                  }}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="bio"
+          render={({ field }) => (
+            <FormItem className="flex flex-col  w-full gap-3">
+              <FormLabel className="text-base-semibold text-light-2">
+                bio
+              </FormLabel>
+              <FormControl className="">
+                <Textarea
+                  rows={10}
+                  className="account-form_input no-focus"
+                  onChange={(e) => {
+                    handleImage(e, field.onChange);
+                  }}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit" className="bg-primary-500">
+          Submit
+        </Button>
       </form>
     </Form>
   );
