@@ -14,12 +14,12 @@ export async function updateUser(
 ): Promise<void> {
   connectedToDb();
 
-  await User.findOneAndUpdate(
-    { id: userId },
-    { username: username.toLowerCase(), name, bio, image, onboarded: true },
-    { upsert: true }
-  );
   try {
+    await User.findOneAndUpdate(
+      { id: userId },
+      { username: username.toLowerCase(), name, bio, image, onboarded: true },
+      { upsert: true }
+    );
     if (path === "/profile/edit") {
       revalidatePath(path);
     }
