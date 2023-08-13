@@ -4,16 +4,24 @@ import { revalidatePath } from "next/cache";
 import { User } from "../models/user.models";
 import { connectedToDb } from "../mongoose";
 
-export async function updateUser(
-  userId: string,
-  username: string,
-  name: string,
-  bio: string,
-  image: string,
-  path: string
-): Promise<void> {
-  connectedToDb();
+interface Params {
+  userId: string;
+  username: string;
+  name: string;
+  bio: string;
+  image: string;
+  path: string;
+}
 
+export async function updateUser({
+  userId,
+  username,
+  name,
+  bio,
+  image,
+  path,
+}: Params): Promise<void> {
+  connectedToDb();
   try {
     await User.findOneAndUpdate(
       { id: userId },
@@ -24,6 +32,6 @@ export async function updateUser(
       revalidatePath(path);
     }
   } catch (e) {
-    throw new Error(`failed to create/updade ,${e}`);
+    console.log(e);
   }
 }
